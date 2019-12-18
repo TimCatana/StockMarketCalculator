@@ -1,1 +1,1 @@
-compilation: gcc -ansi -o tax taxCalculator.c
+compilation: gcc -ansi -o stock stockCalculator.c
