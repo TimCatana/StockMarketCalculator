@@ -1,1 +1,0 @@
-compilation: gcc -ansi -o stock stockCalculator.c
