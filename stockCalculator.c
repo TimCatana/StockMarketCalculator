@@ -22,13 +22,11 @@ int getAndFormatInput(char *currentInput){
 
 bool searchDigit(char *currentInput, bool isLetterFound){
 	int i;
-
 	for(i = 0; i < strlen(currentInput); i++){
 		if(isdigit(currentInput[i]) == 0 && (currentInput[i] != '.' && currentInput[i] != ',')){
 			isLetterFound = true;
 		}
 	}
-
 	return(isLetterFound);
 }
 
