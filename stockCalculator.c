@@ -14,16 +14,13 @@
  */
 
 int getAndFormatInput(char *currentInput){
-
 	fgets(currentInput, 100, stdin);
 	sscanf(currentInput, "%s", currentInput);
-
 	return(0);
 }
 
 
 bool searchDigit(char *currentInput, bool isLetterFound){
-
 	int i;
 
 	for(i = 0; i < strlen(currentInput); i++){
@@ -36,7 +33,6 @@ bool searchDigit(char *currentInput, bool isLetterFound){
 }
 
 bool assignFloat(char currentInput[100], float *number){
-
 	bool isLetterFound = false;
 	getAndFormatInput(currentInput);
 	*number = atof(currentInput);
@@ -51,11 +47,9 @@ bool assignFloat(char currentInput[100], float *number){
 		printf("please insert a valid statement or number\n");
 		return(true);
 	}
-
 }
 
 bool assignInt(char currentInput[100], int *number){
-
 	bool isLetterFound = false;
 	getAndFormatInput(currentInput);
 	*number = atoi(currentInput);
@@ -70,18 +64,14 @@ bool assignInt(char currentInput[100], int *number){
 		printf("please insert a valid statement or number\n");
 		return(true);
 	}
-
 }
 
 int EOPQuestons(char *currentInput, bool *chooseTask, bool *setShareCost, bool *setQuantity, bool *setBuyP, bool *setBuyQ, bool *setSellP, bool *setSellQ, bool *terminate){
-
 	int inputError = true;
 
 	while(inputError == true){
-
 		printf("\n\nDo you want to do another calculation? [Y or N]: ");
 		getAndFormatInput(currentInput);
-
 		system("clear");
 
 		if(strcmp(currentInput, "Y") != 0 && strcmp(currentInput, "y") != 0 && strcmp(currentInput, "N") != 0 && strcmp(currentInput, "n") != 0){
@@ -89,11 +79,9 @@ int EOPQuestons(char *currentInput, bool *chooseTask, bool *setShareCost, bool *
 		} else {
 			inputError = false;
 		}
-
 	}
 
 	if(strcmp(currentInput, "Y") == 0 || strcmp(currentInput, "y") == 0){
-
 		*chooseTask = true; 
 		*setShareCost = true; 
 		*setQuantity = true;
@@ -101,12 +89,9 @@ int EOPQuestons(char *currentInput, bool *chooseTask, bool *setShareCost, bool *
 		*setBuyQ = true;
 		*setSellP = true;
 		*setSellQ = true;
-
 	} else if (strcmp(currentInput, "N") == 0 || strcmp(currentInput, "n") == 0){
-
 		*terminate = true;
 		system("clear");
-
 	}
 
 	return(0);
@@ -114,7 +99,6 @@ int EOPQuestons(char *currentInput, bool *chooseTask, bool *setShareCost, bool *
 
 
 int main ( int argc, char *argv[] ) {
-
 	char currentInput[100];
 
 	/* while loop variables (for error checking)*/
@@ -133,13 +117,10 @@ int main ( int argc, char *argv[] ) {
 	int buyQ, sellQ;
 	float sellProfit, percentProfit;
 
-
 	while(!terminate){
-
 		system("clear");
 
 		while(chooseTask){
-
 			printf("do you want to: calculate the cost of purchasing a number of shares (1), see how many shares you can purchase with a sum of money (2), or calulate gains or losses (3)?: ");
 			chooseTask = assignInt(currentInput, &task);
 
@@ -147,13 +128,10 @@ int main ( int argc, char *argv[] ) {
 				printf("only the numbers 1, 2 and 3 are valid\n");
 				chooseTask = true;
 			}
-
 		}
-
 
 		/* how much buying a certain quantity of shares would cost */
 		if(task == 1){
-
 			while(setShareCost){
 				printf("cost of 1 share: ");
 				setShareCost = assignFloat(currentInput, &shareCost);
@@ -169,13 +147,10 @@ int main ( int argc, char *argv[] ) {
 			printf("Share cost: $%0.2f\n", shareCost);
 			printf("Quantity: %d\n", numOfShares);
 			printf("Total cost: $%0.2f\n", purchaseCost);
-
 		}
-
 
 		/* how many shares can you buy with a specific quantity of money */
 		if(task == 2){
-
 			while(setShareCost){
 				printf("cost of 1 share: ");
 				setShareCost = assignFloat(currentInput, &shareCost);
@@ -191,18 +166,16 @@ int main ( int argc, char *argv[] ) {
 			printf("Share cost: $%0.2f\n", shareCost);
 			printf("$ invested: $%0.2f\n", moneyInvested);
 			printf("Max quantity purchasable: %d\n", numOfShares);
-
 		}
 
 
 		/* calculate gains or losses */
 		if(task == 3){
-
 			while(setBuyP){
 				printf("Buy price: ");
 				setBuyP = assignFloat(currentInput, &buyP);
 			}
-
+			
 			while(setBuyQ){
 				printf("Buy quantity: ");
 				setBuyQ = assignInt(currentInput, &buyQ);
@@ -214,7 +187,6 @@ int main ( int argc, char *argv[] ) {
 			}
 
 			while(setSellQ){
-
 				printf("sell quantity: ");
 				setSellQ = assignInt(currentInput, &sellQ);
 
@@ -222,12 +194,10 @@ int main ( int argc, char *argv[] ) {
 					printf("sell quantity must be equal to or less than the buy quantity\n"); /* My decision is that I expect your buy quantity to be the only shares you own, if you want to change this go ahead */
 					setSellQ = true;
 				}
-
 			}
 
 			totalBuyP = buyP * buyQ;
 			totalSellP = sellP * sellQ;
-
 			sellProfit = totalSellP - totalBuyP;
 
 			printf("Purchace price: $%0.2f\n", buyP);
@@ -245,13 +215,11 @@ int main ( int argc, char *argv[] ) {
 				percentProfit = ((totalBuyP - totalSellP) / totalSellP) * 100;
 				printf("Percent loss of: %0.2f%%\n", percentProfit );
 			}
-
 		}
 
 		EOPQuestons(currentInput, &chooseTask, &setShareCost, &setQuantity, &setBuyP, &setBuyQ, &setSellP,  &setSellQ, &terminate);
 	}
 
 	printf("Thank you for using stockCalculator\n");
-
 	return ( 0 );
 }
